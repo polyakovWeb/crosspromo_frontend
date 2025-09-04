@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import AssetsTable from './components/AssetsTable.vue'
 import { ref } from 'vue'
 import axios from 'axios'
+import formatAssets from './utils/formatAssets.service'
 
 const assetsData = ref([])
 
@@ -13,6 +14,8 @@ const getAllAssets = async () => {
 
 onMounted(async () => {
   assetsData.value = await getAllAssets()
+  console.log(assetsData.value[0])
+  console.log(formatAssets(assetsData.value[0]))
 })
 </script>
 
