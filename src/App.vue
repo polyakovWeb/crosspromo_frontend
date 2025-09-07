@@ -1,33 +1,44 @@
 <script setup>
 import { onMounted, provide } from 'vue'
-import AssetsTable from './components/AssetsTable.vue'
+import AssetTable from './components/AssetTable.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import formatAssets from './utils/formatAssets.service'
-import ModalWindow from './components/ModalWindow.vue'
+import AssetModal from './components/AssetModal.vue'
 
 const assetsData = ref([])
-const isModalOpened = ref(true)
+const isLoading = ref(true)
+const isModalOpened = ref(false)
+const modalWindowData = ref([])
 
-const toggleModalOpened = () => (isModalOpened.value = !isModalOpened.value)
+const toggleModalOpened = (modalData) => {
+  if (isModalOpened.value) {
+    modalWindowData.value = []
+  } else {
+    modalWindowData.value = modalData
+  }
+  isModalOpened.value = !isModalOpened.value
+}
 
 const getAllAssets = async () => {
-  const { data } = await axios.get('http://localhost:5001/api/assets/getAssets') //в будущем добавить query params
+  const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/assets/getAssets`) //в будущем добавить query params
   return data
 }
 
 onMounted(async () => {
   const data = await getAllAssets()
   assetsData.value = data.map((assetsItem) => formatAssets(assetsItem))
+  isLoading.value = false
 })
 
 provide('toggleModalOpened', toggleModalOpened)
 </script>
 
 <template>
-  <ModalWindow v-if="isModalOpened" />
-  <div class="flex justify-center">
-    <AssetsTable :assetsData />
+  <AssetModal :assets="modalWindowData" v-if="isModalOpened" />
+  <div class="h-full flex justify-center items-center">
+    <div v-if="isLoading" class="">Загрузка</div>
+    <AssetTable v-else :assetsData class="overflow-y-auto" />
   </div>
 </template>
 

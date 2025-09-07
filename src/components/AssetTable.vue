@@ -14,7 +14,7 @@ defineProps({
     <table class="w-full">
       <thead class="border-b-1 text-xs text-center sm:text-base">
         <tr>
-          <th>Localization</th>
+          <th class="sm:pr-8">Localization</th>
           <th>{{ platforms[0] }}</th>
           <th>{{ platforms[1] }}</th>
         </tr>
