@@ -1,4 +1,6 @@
-function formatAssets(assetsObject) {
+import axios from 'axios'
+
+export const formatAssets = (assetsObject) => {
   // Создаём структуру нового объекта
   const newAssetsObject = {
     localizationCode: assetsObject._id,
@@ -36,4 +38,23 @@ function formatAssets(assetsObject) {
   return newAssetsObject
 }
 
-export default formatAssets
+export const getAllAssets = async (queryParam = {}) => {
+  // { "filterBy": "StoreCode", "search": "rus" } => {StoreCode: "rus"}
+  // { "filterBy": "AppId", "search": "examp-id" } => {AppId: "examp-id"}
+  try {
+    const params = {}
+
+    if (queryParam.filterBy && queryParam.search) {
+      params[queryParam.filterBy] = `${queryParam.search}`
+    }
+
+    console.log(params)
+
+    const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/assets/getAssets`, {
+      params,
+    })
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}

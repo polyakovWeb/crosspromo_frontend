@@ -2,13 +2,13 @@
 import { onMounted, provide } from 'vue'
 import AssetTable from './components/AssetTable.vue'
 import { ref } from 'vue'
-import axios from 'axios'
-import formatAssets from './utils/formatAssets.service'
+import { getAllAssets, formatAssets } from './utils/data.service'
 import AssetModal from './components/AssetModal.vue'
-import LoadingAnimation from './components/LoadingAnimation.vue'
+import LoadingAnimation from './components/UI/LoadingAnimation.vue'
 
 const assetsData = ref([])
 const isLoading = ref(true)
+
 const isModalOpened = ref(false)
 const modalWindowData = ref([])
 
@@ -21,10 +21,8 @@ const toggleModalOpened = (modalData) => {
   isModalOpened.value = !isModalOpened.value
 }
 
-const getAllAssets = async () => {
-  const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/assets/getAssets`) //в будущем добавить query params
-  return data
-}
+// const queryParams = { filterBy: 'AppId', search: 'example-app' }
+const getFiltredAssets = async (queryParams) => await getAllAssets(queryParams)
 
 onMounted(async () => {
   const data = await getAllAssets()
@@ -39,7 +37,7 @@ provide('toggleModalOpened', toggleModalOpened)
   <AssetModal :assets="modalWindowData" v-if="isModalOpened" />
   <div class="h-full flex justify-center items-center">
     <LoadingAnimation v-if="isLoading" :sizePx="60" />
-    <AssetTable v-else :assetsData class="overflow-y-auto" />
+    <AssetTable v-else :assetsData @get-filtred-assets="getFiltredAssets" class="overflow-y-auto" />
   </div>
 </template>
 

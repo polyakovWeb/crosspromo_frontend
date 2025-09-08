@@ -1,16 +1,21 @@
 <script setup>
 import { platforms } from '@/constants'
 import TableRow from './UI/TableRow.vue'
+import FiltredBar from './UI/FiltredBar.vue'
 
 defineProps({
   assetsData: Array,
 })
+
+const emit = defineEmits(['getFiltredAssets'])
 </script>
 
 <template>
   <div class="bg-sky-100 rounded-2xl p-2.5 pb-5">
-    <h1 class="text-center mb-7 sm:text-xl">Crosspromo Assets</h1>
-
+    <div class="flex flex-col gap-2">
+      <h1 class="sm:text-xl text-center">Crosspromo Assets</h1>
+      <FiltredBar @get-filtred-assets="(params) => emit('getFiltredAssets', params)" class="mb-4" />
+    </div>
     <table class="w-full">
       <thead class="border-b-1 text-xs text-center sm:text-base">
         <tr>
