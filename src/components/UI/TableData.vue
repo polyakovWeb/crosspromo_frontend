@@ -5,8 +5,8 @@ defineProps({
   platformAssets: Object, // {AdType: {...}, name: ""}
 })
 
-const totalFileSize = (adTypeArray) => {
-  const totalFileSize = adTypeArray.reduce(
+const totalFileSize = (adTypeData) => {
+  const totalFileSize = adTypeData.reduce(
     (totalSize, nextAdTypeItem) => (totalSize += nextAdTypeItem.FileSize),
     0,
   )
@@ -15,7 +15,7 @@ const totalFileSize = (adTypeArray) => {
 
 const toggleModalOpened = inject('toggleModalOpened')
 const assetsOnClickHandler = (platformAssets, adTypeName) => {
-  toggleModalOpened(platformAssets.AdType[adTypeName][0])
+  toggleModalOpened(platformAssets.AdType[adTypeName])
 }
 </script>
 
@@ -30,7 +30,7 @@ const assetsOnClickHandler = (platformAssets, adTypeName) => {
             @click="assetsOnClickHandler(platformAssets, adTypeName)"
             >{{ adTypeName }}</span
           >
-          {{ totalFileSize(platformAssets.AdType[adTypeName][0]) }} Мб
+          {{ totalFileSize(platformAssets.AdType[adTypeName].data) }} Мб
         </p>
       </li>
     </ul>

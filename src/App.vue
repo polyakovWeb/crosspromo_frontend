@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import formatAssets from './utils/formatAssets.service'
 import AssetModal from './components/AssetModal.vue'
+import LoadingAnimation from './components/LoadingAnimation.vue'
 
 const assetsData = ref([])
 const isLoading = ref(true)
@@ -37,7 +38,7 @@ provide('toggleModalOpened', toggleModalOpened)
 <template>
   <AssetModal :assets="modalWindowData" v-if="isModalOpened" />
   <div class="h-full flex justify-center items-center">
-    <div v-if="isLoading" class="">Загрузка</div>
+    <LoadingAnimation v-if="isLoading" :sizePx="60" />
     <AssetTable v-else :assetsData class="overflow-y-auto" />
   </div>
 </template>
