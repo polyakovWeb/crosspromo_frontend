@@ -11,9 +11,9 @@ const toggleModalOpened = inject('toggleModalOpened')
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-black opacity-70"></div>
+  <div class="fixed inset-0 bg-black opacity-70 z-10"></div>
 
-  <div class="fixed inset-0 flex justify-center items-center p-5">
+  <div class="fixed inset-0 flex justify-center items-center p-5 z-10">
     <div
       class="bg-white p-5 pt-12 sm:pt-15 max-h-[90vh] max-w-lg w-full overflow-y-auto relative text-xs sm:text-sm"
     >

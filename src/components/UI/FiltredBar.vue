@@ -39,8 +39,10 @@ watch(queryParams, () => emit('getFiltredAssets', queryParams))
             </option>
           </select>
         </div>
-        <label for="search-field" class="border-1 border-slate-300 rounded-lg relative">
-          <img class="size-4 absolute left-2 top-2" src="/search.svg" alt="Search" />
+        <label for="search-field" class="border-1 border-slate-300 rounded-lg">
+          <div class="relative">
+            <img class="size-4 absolute left-2 top-2.5 z-0" src="/search.svg" alt="Search" />
+          </div>
           <input
             v-model="searchValue"
             id="search-field"
