@@ -25,6 +25,7 @@ const emit = defineEmits(['getFiltredAssets'])
         </tr>
       </thead>
       <tbody class="text-xs sm:text-sm">
+        <TableRow v-if="assetsData.length === 0" :assetsData="null" />
         <TableRow
           v-for="(curAssetsData, index) in assetsData"
           :assetsData="curAssetsData"

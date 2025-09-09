@@ -21,8 +21,16 @@ const toggleModalOpened = (modalData) => {
   isModalOpened.value = !isModalOpened.value
 }
 
-// const queryParams = { filterBy: 'AppId', search: 'example-app' }
-const getFiltredAssets = async (queryParams) => await getAllAssets(queryParams)
+// Возможен возврат пустого массива [], т.к. не всегда найдутся значения, подходящие под фильтр
+const getFiltredAssets = async (queryParams) => {
+  try {
+    const data = await getAllAssets(queryParams)
+    const formatData = data.map((assetsItem) => formatAssets(assetsItem))
+    assetsData.value = formatData
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 onMounted(async () => {
   const data = await getAllAssets()

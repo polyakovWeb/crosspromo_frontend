@@ -2,11 +2,9 @@
 import { platforms as platformsConst } from '@/constants'
 import TableData from './TableData.vue'
 
-const props = defineProps({
+defineProps({
   assetsData: Object,
 })
-
-const { localizationCode, platforms } = props.assetsData
 
 // поиск информации для размещения в столбцах по платформам
 const findPlatformData = (currentPlatformName, allPlatformsData) => {
@@ -16,12 +14,19 @@ const findPlatformData = (currentPlatformName, allPlatformsData) => {
 </script>
 
 <template>
-  <tr class="bg-white border-b-1">
+  <tr v-if="assetsData === null" class="bg-white border-b-1">
+    <td class="p-5">-</td>
+    <template v-for="(currentPlatformName, index) in platformsConst" :key="index">
+      <TableData :platformAssets="[undefined, undefined]" />
+    </template>
+  </tr>
+
+  <tr v-else class="bg-white border-b-1">
     <td class="p-5">
-      {{ localizationCode[0].toUpperCase() + localizationCode.slice(1) }}
+      {{ assetsData.localizationCode[0].toUpperCase() + assetsData.localizationCode.slice(1) }}
     </td>
     <template v-for="(currentPlatformName, index) in platformsConst" :key="index">
-      <TableData :platformAssets="findPlatformData(currentPlatformName, platforms)" />
+      <TableData :platformAssets="findPlatformData(currentPlatformName, assetsData.platforms)" />
     </template>
   </tr>
 </template>

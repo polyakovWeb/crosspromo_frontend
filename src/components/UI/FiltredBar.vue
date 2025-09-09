@@ -5,7 +5,7 @@ import { reactive, ref, watch } from 'vue'
 
 const selectedFilter = ref('')
 // Кастомный реф для отложенного обновления переменной во избежания запроса на ввод каждого символа
-const searchValue = useDebouncedRef('', 800)
+const searchValue = useDebouncedRef('')
 
 const queryParams = reactive({
   filterBy: selectedFilter,

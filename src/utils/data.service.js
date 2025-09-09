@@ -48,8 +48,6 @@ export const getAllAssets = async (queryParam = {}) => {
       params[queryParam.filterBy] = `${queryParam.search}`
     }
 
-    console.log(params)
-
     const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/assets/getAssets`, {
       params,
     })
