@@ -1,35 +1,30 @@
-# vue-project
+# Crosspromo_frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Клиентская часть для отображения адаптивной таблицы данных
 
-## Recommended IDE Setup
+## Ключевые моменты
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Приложение написано на Vue
+- Адаптивная вёрстка
+- Данные получаются с бэкенда как при монтировании таблицы, так и при фильтрации по заданным параметрам
 
-## Customize configuration
+## Стэк
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+-  VueJS
+-  Tailwind
+-  Axios
+-  Vite
 
-## Project Setup
+## Установка и запуск
 
-```sh
-npm install
-```
+1. Клонирование репозитория
 
-### Compile and Hot-Reload for Development
+`git clone https://github.com/polyakovWeb/crosspromo_frontend`
 
-```sh
-npm run dev
-```
+2. Установка зависимостей
 
-### Compile and Minify for Production
+`npm install`
 
-```sh
-npm run build
-```
+3. Запуск приложения
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+`npm run dev`
