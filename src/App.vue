@@ -2,7 +2,7 @@
 import { onMounted, provide } from 'vue'
 import AssetTable from './components/AssetTable.vue'
 import { ref } from 'vue'
-import { getAllAssets, formatAssets } from './utils/data.service'
+import { getAllAssets } from './utils/data.service'
 import AssetModal from './components/AssetModal.vue'
 import LoadingAnimation from './components/UI/LoadingAnimation.vue'
 
@@ -25,8 +25,8 @@ const toggleModalOpened = (modalData) => {
 const getFiltredAssets = async (queryParams) => {
   try {
     const data = await getAllAssets(queryParams)
-    const formatData = data.map((assetsItem) => formatAssets(assetsItem))
-    assetsData.value = formatData
+    // const formatData = data.map((assetsItem) => formatAssets(assetsItem))
+    assetsData.value = data
   } catch (error) {
     console.error(error)
   }
@@ -34,7 +34,8 @@ const getFiltredAssets = async (queryParams) => {
 
 onMounted(async () => {
   const data = await getAllAssets()
-  assetsData.value = data.map((assetsItem) => formatAssets(assetsItem))
+  assetsData.value = data
+  // assetsData.value = data.map((assetsItem) => formatAssets(assetsItem))
   isLoading.value = false
 })
 
